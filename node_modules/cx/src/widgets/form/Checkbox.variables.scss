@@ -1,0 +1,8 @@
+@use "../box" as *;
+@use "./Field.variables.scss" as *;
+
+$cx-default-checkbox-size: 14px !default;
+$cx-default-checkbox-color: $cx-default-input-color !default;
+$cx-default-checkbox-background-color: $cx-default-input-background-color !default;
+$cx-default-checkbox-border-width: $cx-default-box-border-width !default;
+$cx-default-checkbox-border-color: $cx-default-input-border-color !default;

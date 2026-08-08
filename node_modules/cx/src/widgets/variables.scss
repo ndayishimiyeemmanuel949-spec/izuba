@@ -1,0 +1,61 @@
+// Forward utility variables first (so they're available to consumers)
+@forward "../util/scss/defaults.scss";
+
+// Forward widget base variables
+@forward "./box.scss";
+@forward "Button.variables.scss";
+
+// Use utilities locally for derived variable definitions
+@use "sass:map";
+@use "../util/scss/defaults.scss" as *;
+@use "../util/scss/include.scss" as include;
+
+//Selection
+$cx-selection-background-color: rgba(135, 206, 250, 0.6);
+
+//List
+$cx-default-list-item-padding: 5px 10px !default;
+
+// Section
+$cx-default-section-header-padding: 1rem 0 !default;
+$cx-default-section-header-margin: 0 1.5rem !default;
+$cx-default-section-header-border-width: 1px !default;
+$cx-default-section-header-border-color: rgba(128, 128, 128, 0.3) !default;
+$cx-default-section-header-font-weight: null !default;
+
+$cx-default-section-footer-padding: 1rem 0 !default;
+$cx-default-section-footer-margin: 0 1.5rem !default;
+$cx-default-section-footer-border-width: 1px !default;
+$cx-default-section-footer-border-color: rgba(128, 128, 128, 0.3) !default;
+
+$cx-default-section-body-padding: 1rem 1.5rem !default;
+
+// ProgressBar
+$cx-default-progressbar-width: 180px !default;
+$cx-default-progressbar-height: 24px !default;
+$cx-default-progressbar-font-size: smaller !default;
+$cx-default-progressbar-color: $cx-default-color !default;
+$cx-default-progressbar-background-color: rgba(#fff, 0.5) !default;
+$cx-default-progressbar-border-width: 1px !default;
+$cx-default-progressbar-border-color: #98d4ff !default;
+$cx-default-progressbar-border-radius: 0 !default;
+
+$cx-default-progressbar-indicator-background-color: rgba(#98d4ff, 0.8) !default;
+
+@forward "form/Field.variables.scss";
+@forward "form/variables";
+@forward "grid/variables";
+@forward "nav/variables";
+@forward "overlay/variables";
+@forward "drag-drop/variables";
+@forward "overlay/variables";
+
+@include include.cx-register-dependencies(
+   (
+      "cx/widgets/FlexRow": "cx/widgets/FlexBox",
+      "cx/widgets/FlexCol": "cx/widgets/FlexBox",
+      "cx/widgets/CxCredit": "cx/widgets/Tooltip",
+      "cx/widgets/Button": "cx/widgets/HtmlElement",
+      "cx/widgets/HtmlElement": "cx/widgets/Tooltip",
+   )
+);

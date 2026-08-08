@@ -1,0 +1,12 @@
+@use "sass:map";
+
+@function cx-map-deep-get($map, $keys...){
+   @each $key in $keys {
+      $map: map.get($map, $key)
+   }
+   @if $map != null {
+      @return $map
+   } @else {
+      @return null
+   }
+};

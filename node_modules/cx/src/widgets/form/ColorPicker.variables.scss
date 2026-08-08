@@ -1,0 +1,9 @@
+@use "../box" as *;
+@use "./Field.variables.scss" as *;
+
+$cx-default-colorpicker-font-family: "Consolas", monospace !default;
+$cx-default-colorpicker-font-size: 11px !default;
+$cx-default-colorpicker-background-color: $cx-default-input-background-color !default;
+$cx-default-colorpicker-border-width: $cx-default-box-border-width !default;
+$cx-default-colorpicker-border-color: $cx-default-input-border-color !default;
+$cx-default-colorpicker-box-shadow: none !default;

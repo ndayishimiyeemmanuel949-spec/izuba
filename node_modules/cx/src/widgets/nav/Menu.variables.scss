@@ -1,0 +1,13 @@
+@use "../../util/scss/include" as *;
+@use "sass:map";
+
+// MENU
+$cx-default-menu-separator-color: lightgray !default;
+
+@include cx-register-dependencies(
+   (
+      "cx/widgets/Menu": "cx/widgets/MenuItem",
+      "cx/widgets/MenuItem": "cx/widgets/Dropdown",
+      "cx/widgets/SubMenu": "cx/widgets/MenuItem",
+   )
+);

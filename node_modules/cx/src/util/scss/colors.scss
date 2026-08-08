@@ -1,0 +1,10 @@
+
+@use "sass:color";
+
+@function cx-whiten($color, $percentage) {
+   @return color.mix(white, $color, $percentage);
+}
+
+@function cx-blacken($color, $percentage) {
+   @return color.mix(black, $color, $percentage);
+}

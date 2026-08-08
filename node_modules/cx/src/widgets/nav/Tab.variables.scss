@@ -1,0 +1,15 @@
+@use "../../util/scss/defaults" as *;
+@use "../../util/scss/clockwise" as *;
+@use "../box" as *;
+
+$cx-default-tab-color: inherit !default;
+$cx-default-tab-font-size: null !default;
+$cx-default-tab-font-weight: inherit !default;
+$cx-default-tab-background-color: transparent !default;
+$cx-default-tab-border-width: $cx-default-box-border-width !default;
+$cx-default-tab-border-color: transparent !default;
+$cx-default-tab-border-radius: $cx-default-border-radius !default;
+$cx-default-tab-padding: $cx-default-box-padding-top 2 *
+   $cx-default-box-padding-right $cx-default-box-padding-bottom 2 *
+   $cx-default-box-padding-left !default;
+$cx-default-tab-box-shadow: none !default;

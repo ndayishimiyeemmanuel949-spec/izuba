@@ -1,0 +1,153 @@
+@use "sass:map";
+@use "sass:math";
+@use "../util/scss/screen-size.scss" as *;
+@use "../util/scss/pad-size.scss" as *;
+@use "../util/scss/include.scss" as *;
+@use "../util/scss/besm.scss" as *;
+
+@mixin cx-flexbox-spacing($divider, $besm: $cx-besm) {
+   $state: map.get($besm, state);
+   @each $pad, $size in $cx-pad-size {
+      &.#{$state}#{$pad}-hspacing {
+         margin-left: -(math.div($size, $divider));
+         margin-right: -(math.div($size, $divider));
+
+         & > * {
+            margin-left: math.div($size, $divider);
+            margin-right: math.div($size, $divider);
+         }
+      }
+
+      &.#{$state}#{$pad}-vspacing {
+         margin-top: -(math.div($size, $divider));
+         margin-bottom: -(math.div($size, $divider));
+
+         & > * {
+            margin-top: math.div($size, $divider);
+            margin-bottom: math.div($size, $divider);
+         }
+      }
+   }
+}
+
+@mixin cx-flexbox($name: "flexbox", $besm: $cx-besm) {
+   $block: map.get($besm, block);
+   $element: map.get($besm, element);
+   $state: map.get($besm, state);
+   $mod: map.get($besm, mod);
+
+   .#{$block}#{$name} {
+      box-sizing: border-box;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+
+      &.#{$state}nested {
+         overflow: hidden;
+
+         & > div {
+            overflow: auto;
+         }
+      }
+
+      @each $pad, $size in $cx-pad-size {
+         &.#{$state}#{$pad}-hpad {
+            padding-left: $size;
+            padding-right: $size;
+         }
+
+         &.#{$state}#{$pad}-vpad {
+            padding-top: $size;
+            padding-bottom: $size;
+         }
+      }
+   }
+
+   .#{$element}#{$name}-flexbox {
+      display: flex;
+      flex: 1 1 auto;
+
+      &.#{$state}column {
+         flex-direction: column;
+      }
+
+      &.#{$state}row {
+         flex-direction: row;
+      }
+
+      &.#{$state}row-reverse {
+         flex-direction: row-reverse;
+      }
+
+      @include cx-flexbox-spacing(2, $besm);
+
+      &.#{$state}align-center {
+         align-items: center;
+      }
+
+      &.#{$state}align-start {
+         align-items: flex-start;
+      }
+
+      &.#{$state}align-end {
+         align-items: flex-end;
+      }
+
+      &.#{$state}align-baseline {
+         align-items: baseline;
+      }
+
+      &.#{$state}wrap {
+         flex-wrap: wrap;
+      }
+
+      &.#{$state}justify-center {
+         justify-content: center;
+      }
+
+      &.#{$state}justify-start {
+         justify-content: flex-start;
+      }
+
+      &.#{$state}justify-end {
+         justify-content: flex-end;
+      }
+
+      &.#{$state}justify-space-between {
+         justify-content: space-between;
+      }
+
+      &.#{$state}justify-space-around {
+         justify-content: space-around;
+      }
+
+      &.#{$state}justify-space-evenly {
+         justify-content: space-evenly;
+      }
+
+      &.#{$state}target-phone {
+         @media not screen and (min-width: $screen-size-small) {
+            display: block;
+            @include cx-flexbox-spacing(1, $besm);
+         }
+      }
+
+      &.#{$state}target-tablet {
+         @media not screen and (min-width: $screen-size-medium) {
+            display: block;
+            @include cx-flexbox-spacing(1, $besm);
+         }
+      }
+
+      &.#{$state}target-desktop {
+         @media not screen and (min-width: $screen-size-large) {
+            display: block;
+            @include cx-flexbox-spacing(1, $besm);
+         }
+      }
+   }
+}
+
+@if (cx-should-include("cx/widgets/FlexBox")) {
+   @include cx-flexbox();
+}

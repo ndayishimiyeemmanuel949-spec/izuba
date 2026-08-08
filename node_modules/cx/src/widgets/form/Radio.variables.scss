@@ -1,0 +1,7 @@
+@use "../box.scss" as *;
+@use "./Field.variables.scss" as *;
+
+$cx-default-radio-color: currentColor !default;
+$cx-default-radio-background-color: $cx-default-input-background-color !default;
+$cx-default-radio-border-width: $cx-default-box-border-width !default;
+$cx-default-radio-border-color: $cx-default-input-border-color !default;
