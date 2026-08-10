@@ -79,50 +79,97 @@ catch(error){
 }
 })
 
-app.put("/update/:user_id",async(req,res)=>{
-try{
-    const {username,email,password }=req.body
-    const userId=parseInt(req.params.user_id)
-    const [row] = await db.execute(
-        "select * from leaders where user_id= ?",[userId]
-    )
-if(row.length === 0){
-    return res.status(404).json({message: "user not found"})
-}
+app.put("/update/:user_id", async (req, res) => {
+    try {
+        const { username, email, password } = req.body;
 
-await db.execute(
-    "update leaders set username= ?,email= ?,password= ? where user_id=?",[username, email,password,userId]
-)
-return res.status(200).json({message:"username updated"
+        const userId = parseInt(req.params.user_id);
 
-})
+        // Check if user exists
+        const [row] = await db.execute(
+            "SELECT * FROM leaders WHERE user_id = ?",
+            [userId]
+        );
 
-}
-catch(error){
-    console.log(error)
-    return res.status(500).json({message: "internal serve error"})
-
-}
-
-})
-
-
-app.post("/login",async(req,res)=>{
-    try{
-        const {username, password}=req.body
-        const [row]= await db.execute(
-            "select * from leaders where username = ? ",[username]
-        )
-        if(row.length ===0){
-            return res.status(404).json({message: "username or Password not foun"})
+        if (row.length === 0) {
+            return res.status(404).json({
+                message: "User not found"
+            });
         }
-        return res.status(200).json({message: "user logged in"})
 
-    }catch(error){
-        console.log(error)
-        return res.status(500).json({message: "internal server error "})
+        // Hash the new password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Update user
+        await db.execute(
+            `UPDATE leaders
+             SET username = ?, email = ?, password = ?
+             WHERE user_id = ?`,
+            [username, email, hashedPassword, userId]
+        );
+
+        return res.status(200).json({
+            message: "User updated successfully"
+        });
+
+    } catch (error) {
+        console.log(error);
+
+        return res.status(500).json({
+            message: "Internal server error"
+        });
     }
-})
+});
 
+app.post("/login", async (req, res) => {
+    try {
+        const { username, password } = req.body;
+
+        // Find user by username
+        const [row] = await db.execute(
+            "SELECT * FROM leaders WHERE username = ?",
+            [username]
+        );
+
+        // User doesn't exist
+        if (row.length === 0) {
+            return res.status(404).json({
+                message: "Username or password is incorrect"
+            });
+        }
+
+        const user = row[0];
+
+        // Compare entered password with hashed password
+        const passwordMatch = await bcrypt.compare(
+            password,
+            user.password
+        );
+
+        // Password is incorrect
+        if (!passwordMatch) {
+            return res.status(401).json({
+                message: "Username or password is incorrect"
+            });
+        }
+
+        // Login successful
+        return res.status(200).json({
+            message: "User logged in successfully",
+            user: {
+                user_id: user.user_id,
+                username: user.username,
+                email: user.email
+            }
+        });
+
+    } catch (error) {
+        console.log(error);
+
+        return res.status(500).json({
+            message: "Internal server error"
+        });
+    }
+});
 
 app.listen(5000, ()=>console.log("Server is running on port 5000"))
