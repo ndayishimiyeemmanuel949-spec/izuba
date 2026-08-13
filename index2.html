@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <h2>🏫 My School</h2>
+            <p>Management System</p>
+        </div>
+
+        <nav>
+            <a href="#" class="active">🏠 Dashboard</a>
+            <a href="#">👥 Students</a>
+            <a href="#">👨‍🏫 Teachers</a>
+            <a href="#">📚 Classes</a>
+            <a href="#">📋 Reports</a>
+            <a href="#">👤 User Management</a>
+        </nav>
+
+        <button class="logout" onclick="logout()">↪ Logout</button>
+    </aside>
+
+
+    <!-- Main Content -->
+    <main class="main">
+
+        <!-- Top bar -->
+        <header class="topbar">
+            <div>
+                <h1>Dashboard</h1>
+                <p>Welcome back, Administrator 👋</p>
+            </div>
+
+            <div class="profile">
+                <div class="avatar">A</div>
+                <div>
+                    <strong>Admin</strong>
+                    <small>Administrator</small>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- Statistics -->
+        <section class="cards">
+
+            <div class="card">
+                <div class="card-icon">👥</div>
+                <div>
+                    <p>Total Students</p>
+                    <h2>1,250</h2>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">👨‍🏫</div>
+                <div>
+                    <p>Total Teachers</p>
+                    <h2>85</h2>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">📚</div>
+                <div>
+                    <p>Total Classes</p>
+                    <h2>32</h2>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">👤</div>
+                <div>
+                    <p>System Users</p>
+                    <h2>45</h2>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- Content -->
+        <section class="content-grid">
+
+            <!-- Quick Actions -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>Quick Actions</h2>
+                </div>
+
+                <div class="actions">
+
+                    <button onclick="openPage('students')">
+                        <span>👥</span>
+                        <strong>Add Student</strong>
+                        <small>Register a new student</small>
+                    </button>
+
+                    <button onclick="openPage('teachers')">
+                        <span>👨‍🏫</span>
+                        <strong>Add Teacher</strong>
+                        <small>Register a teacher</small>
+                    </button>
+
+                    <button onclick="openPage('classes')">
+                        <span>📚</span>
+                        <strong>Create Class</strong>
+                        <small>Create a new class</small>
+                    </button>
+
+                    <button onclick="openPage('reports')">
+                        <span>📋</span>
+                        <strong>View Reports</strong>
+                        <small>Check school reports</small>
+                    </button>
+
+                </div>
+            </div>
+
+
+            <!-- Recent Activities -->
+            <div class="panel">
+                <div class="panel-header">
+                    <h2>Recent Activities</h2>
+                    <a href="#">View all</a>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-icon">👤</div>
+                    <div>
+                        <strong>New student registered</strong>
+                        <p>John Doe was added to Senior 3</p>
+                        <small>10 minutes ago</small>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-icon">👨‍🏫</div>
+                    <div>
+                        <strong>Teacher added</strong>
+                        <p>Mr. Patrick joined the school</p>
+                        <small>1 hour ago</small>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-icon">📚</div>
+                    <div>
+                        <strong>New class created</strong>
+                        <p>Senior 4 Mathematics</p>
+                        <small>2 hours ago</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Welcome section -->
+        <section class="welcome">
+            <h2>School Management System</h2>
+            <p>
+                Manage students, teachers, classes, reports and system users
+                from one place.
+            </p>
+        </section>
+
+    </main>
+
+</div>
+
+<script src="index.js"></script>
+
+</body>
+</html>

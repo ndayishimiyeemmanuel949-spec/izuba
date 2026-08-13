@@ -1,0 +1,1115 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>School Leaders Management</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        header {
+            background: #1d3557;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        header h1 {
+            margin-bottom: 8px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(300px, 1fr));
+
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h2 {
+            margin-bottom: 20px;
+            color: #1d3557;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+
+            border: 1px solid #ccc;
+            border-radius: 6px;
+
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #457b9d;
+        }
+
+        button {
+            padding: 11px 18px;
+
+            border: none;
+            border-radius: 6px;
+
+            background: #1d3557;
+            color: white;
+
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        .register-btn {
+            background: #2a9d8f;
+        }
+
+        .login-btn {
+            background: #457b9d;
+        }
+
+        .update-btn {
+            background: #e9c46a;
+            color: #222;
+        }
+
+        .delete-btn {
+            background: #e63946;
+        }
+
+        .refresh-btn {
+            background: #1d3557;
+            margin-bottom: 15px;
+        }
+
+        .message {
+            display: none;
+
+            margin-top: 15px;
+            padding: 12px;
+
+            border-radius: 6px;
+        }
+
+        .success {
+            display: block;
+            background: #d8f3dc;
+            color: #1b4332;
+        }
+
+        .error {
+            display: block;
+            background: #ffe5e5;
+            color: #9b2226;
+        }
+
+        .users-section {
+            margin-top: 30px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th {
+            background: #1d3557;
+            color: white;
+            padding: 13px;
+            text-align: left;
+        }
+
+        td {
+            padding: 13px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 25px;
+            color: #777;
+        }
+
+        .logged-user {
+            margin-top: 20px;
+            padding: 15px;
+
+            background: #e8f5e9;
+            border-radius: 8px;
+
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: 95%;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>School Leaders Management</h1>
+
+    <p>Register • Login • Update • Delete</p>
+
+</header>
+
+
+<div class="container">
+
+
+    <!-- ========================= -->
+    <!-- REGISTER + LOGIN -->
+    <!-- ========================= -->
+
+    <div class="cards">
+
+
+        <!-- REGISTER -->
+
+        <div class="card">
+
+            <h2>Register New Leader</h2>
+
+            <form id="registerForm">
+
+                <input
+                    type="text"
+                    id="registerUsername"
+                    placeholder="Username"
+                    required
+                >
+
+                <input
+                    type="email"
+                    id="registerEmail"
+                    placeholder="Email"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="registerPassword"
+                    placeholder="Password"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    class="register-btn">
+
+                    Register
+
+                </button>
+
+            </form>
+
+
+            <div
+                id="registerMessage"
+                class="message">
+            </div>
+
+        </div>
+
+
+        <!-- LOGIN -->
+
+        <div class="card">
+
+            <h2>Login</h2>
+
+            <form id="loginForm">
+
+                <input
+                    type="text"
+                    id="loginUsername"
+                    placeholder="Username"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Password"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    class="login-btn">
+
+                    Login
+
+                </button>
+
+            </form>
+
+
+            <div
+                id="loginMessage"
+                class="message">
+            </div>
+
+
+            <div
+                id="loggedUser"
+                class="logged-user">
+            </div>
+
+        </div>
+
+
+        <!-- UPDATE -->
+
+        <div class="card">
+
+            <h2>Update Leader</h2>
+
+            <form id="updateForm">
+
+                <input
+                    type="number"
+                    id="updateId"
+                    placeholder="User ID"
+                    required
+                >
+
+                <input
+                    type="text"
+                    id="updateUsername"
+                    placeholder="New username"
+                    required
+                >
+
+                <input
+                    type="email"
+                    id="updateEmail"
+                    placeholder="New email"
+                    required
+                >
+
+                <input
+                    type="password"
+                    id="updatePassword"
+                    placeholder="New password"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    class="update-btn">
+
+                    Update User
+
+                </button>
+
+            </form>
+
+
+            <div
+                id="updateMessage"
+                class="message">
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- USERS TABLE -->
+    <!-- ========================= -->
+
+    <div class="card users-section">
+
+        <h2>All School Leaders</h2>
+
+
+        <button
+            class="refresh-btn"
+            onclick="getUsers()">
+
+            Refresh Users
+
+        </button>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Username</th>
+
+                        <th>Email</th>
+
+                        <th>Actions</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="usersTable">
+
+                    <tr>
+
+                        <td
+                            colspan="4"
+                            class="empty">
+
+                            Loading users...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+// ==========================================
+// API ADDRESS
+// ==========================================
+
+const API = "http://localhost:5000";
+
+
+
+// ==========================================
+// SHOW MESSAGE
+// ==========================================
+
+function showMessage(elementId, message, type) {
+
+    const element =
+        document.getElementById(elementId);
+
+
+    element.textContent = message;
+
+
+    element.className =
+        "message " + type;
+
+
+}
+
+
+
+// ==========================================
+// REGISTER
+// ==========================================
+
+document
+    .getElementById("registerForm")
+    .addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+
+        const username =
+            document.getElementById(
+                "registerUsername"
+            ).value;
+
+
+        const email =
+            document.getElementById(
+                "registerEmail"
+            ).value;
+
+
+        const password =
+            document.getElementById(
+                "registerPassword"
+            ).value;
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API}/register`,
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            username,
+                            email,
+                            password
+                        })
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                showMessage(
+                    "registerMessage",
+                    data.message,
+                    "error"
+                );
+
+                return;
+            }
+
+
+            showMessage(
+                "registerMessage",
+                data.message,
+                "success"
+            );
+
+
+            document
+                .getElementById("registerForm")
+                .reset();
+
+
+            // Refresh users table
+
+            getUsers();
+
+
+        }
+        catch (error) {
+
+            console.log(error);
+
+            showMessage(
+                "registerMessage",
+                "Cannot connect to server",
+                "error"
+            );
+
+        }
+
+    });
+
+
+
+// ==========================================
+// LOGIN
+// ==========================================
+
+document
+    .getElementById("loginForm")
+    .addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+
+        const username =
+            document.getElementById(
+                "loginUsername"
+            ).value;
+
+
+        const password =
+            document.getElementById(
+                "loginPassword"
+            ).value;
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API}/login`,
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            username,
+                            password
+                        })
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                showMessage(
+                    "loginMessage",
+                    data.message,
+                    "error"
+                );
+
+                return;
+            }
+
+
+            showMessage(
+                "loginMessage",
+                data.message,
+                "success"
+            );
+
+
+            // Display logged-in user
+
+            const loggedUser =
+                document.getElementById(
+                    "loggedUser"
+                );
+
+
+            loggedUser.style.display = "block";
+
+
+            loggedUser.innerHTML = `
+
+                <strong>Logged in successfully!</strong>
+
+                <br><br>
+
+                User ID:
+                ${data.user.user_id}
+
+                <br>
+
+                Username:
+                ${data.user.username}
+
+                <br>
+
+                Email:
+                ${data.user.email}
+
+            `;
+
+
+            document
+                .getElementById("loginForm")
+                .reset();
+
+
+        }
+        catch (error) {
+
+            console.log(error);
+
+            showMessage(
+                "loginMessage",
+                "Cannot connect to server",
+                "error"
+            );
+
+        }
+
+    });
+
+
+
+// ==========================================
+// GET ALL USERS
+// ==========================================
+
+async function getUsers() {
+
+    const table =
+        document.getElementById(
+            "usersTable"
+        );
+
+
+    try {
+
+        const response =
+            await fetch(
+                `${API}/select1`
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            table.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="4"
+                        class="empty">
+
+                        ${data.message}
+
+                    </td>
+
+                </tr>
+
+            `;
+
+            return;
+        }
+
+
+        table.innerHTML = "";
+
+
+        if (data.sel.length === 0) {
+
+            table.innerHTML = `
+
+                <tr>
+
+                    <td
+                        colspan="4"
+                        class="empty">
+
+                        No users found
+
+                    </td>
+
+                </tr>
+
+            `;
+
+            return;
+        }
+
+
+        data.sel.forEach(user => {
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${user.user_id}
+                </td>
+
+                <td>
+                    ${user.username}
+                </td>
+
+                <td>
+                    ${user.email}
+                </td>
+
+                <td>
+
+                    <div
+                        class="action-buttons">
+
+                        <button
+                            class="update-btn"
+                            onclick="prepareUpdate(
+                                ${user.user_id},
+                                '${escapeQuotes(user.username)}',
+                                '${escapeQuotes(user.email)}'
+                            )">
+
+                            Edit
+
+                        </button>
+
+
+                        <button
+                            class="delete-btn"
+                            onclick="deleteUser(
+                                ${user.user_id}
+                            )">
+
+                            Delete
+
+                        </button>
+
+                    </div>
+
+                </td>
+
+            `;
+
+
+            table.appendChild(row);
+
+        });
+
+
+    }
+    catch (error) {
+
+        console.log(error);
+
+
+        table.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="4"
+                    class="empty">
+
+                    Cannot connect to server
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+}
+
+
+
+// ==========================================
+// ESCAPE QUOTES
+// ==========================================
+
+function escapeQuotes(value) {
+
+    return value
+        .replace(/\\/g, "\\\\")
+        .replace(/'/g, "\\'");
+
+}
+
+
+
+// ==========================================
+// PREPARE UPDATE
+// ==========================================
+
+function prepareUpdate(
+    id,
+    username,
+    email
+) {
+
+    document.getElementById(
+        "updateId"
+    ).value = id;
+
+
+    document.getElementById(
+        "updateUsername"
+    ).value = username;
+
+
+    document.getElementById(
+        "updateEmail"
+    ).value = email;
+
+
+    document.getElementById(
+        "updatePassword"
+    ).value = "";
+
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+
+// ==========================================
+// UPDATE USER
+// ==========================================
+
+document
+    .getElementById("updateForm")
+    .addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+
+        const id =
+            document.getElementById(
+                "updateId"
+            ).value;
+
+
+        const username =
+            document.getElementById(
+                "updateUsername"
+            ).value;
+
+
+        const email =
+            document.getElementById(
+                "updateEmail"
+            ).value;
+
+
+        const password =
+            document.getElementById(
+                "updatePassword"
+            ).value;
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API}/update/${id}`,
+                    {
+
+                        method: "PUT",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            username,
+                            email,
+                            password
+
+                        })
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                showMessage(
+                    "updateMessage",
+                    data.message,
+                    "error"
+                );
+
+                return;
+            }
+
+
+            showMessage(
+                "updateMessage",
+                data.message,
+                "success"
+            );
+
+
+            document
+                .getElementById("updateForm")
+                .reset();
+
+
+            getUsers();
+
+
+        }
+        catch (error) {
+
+            console.log(error);
+
+            showMessage(
+                "updateMessage",
+                "Cannot connect to server",
+                "error"
+            );
+
+        }
+
+    });
+
+
+
+// ==========================================
+// DELETE USER
+// ==========================================
+
+async function deleteUser(id) {
+
+
+    const answer =
+        confirm(
+            "Are you sure you want to delete this user?"
+        );
+
+
+    if (!answer) {
+        return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                `${API}/delete/${id}`,
+                {
+                    method: "DELETE"
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            alert(data.message);
+
+            return;
+        }
+
+
+        alert(data.message);
+
+
+        // Refresh table
+
+        getUsers();
+
+
+    }
+    catch (error) {
+
+        console.log(error);
+
+        alert(
+            "Cannot connect to server"
+        );
+
+    }
+
+}
+
+
+
+// ==========================================
+// LOAD USERS WHEN PAGE OPENS
+// ==========================================
+
+getUsers();
+
+
+</script>
+
+
+</body>
+
+</html>
+```
