@@ -216,7 +216,7 @@
 
 <header>
 
-    <h1>School Leaders Management</h1>
+    <h1>School Teachers  Management system</h1>
 
     <p>Register • Login • Update • Delete</p>
 
@@ -237,28 +237,28 @@
 
         <div class="card">
 
-            <h2>Register New Leader</h2>
+            <h2>Register New Teacher</h2>
 
             <form id="registerForm">
 
                 <input
                     type="text"
                     id="registerUsername"
-                    placeholder="Username"
+                    placeholder="Ex:KEZA Celine"
                     required
                 >
 
                 <input
                     type="email"
                     id="registerEmail"
-                    placeholder="Email"
+                    placeholder="Ex:@gmail.com"
                     required
                 >
 
                 <input
                     type="password"
                     id="registerPassword"
-                    placeholder="Password"
+                    placeholder="Ex:@123@"
                     required
                 >
 
@@ -292,14 +292,14 @@
                 <input
                     type="text"
                     id="loginUsername"
-                    placeholder="Username"
+                    placeholder="Ex:emile"
                     required
                 >
 
                 <input
                     type="password"
                     id="loginPassword"
-                    placeholder="Password"
+                    placeholder="Ex:@emile@"
                     required
                 >
 
@@ -332,14 +332,14 @@
 
         <div class="card">
 
-            <h2>Update Leader</h2>
+            <h2>Update Teacher</h2>
 
             <form id="updateForm">
 
                 <input
                     type="number"
                     id="updateId"
-                    placeholder="User ID"
+                    placeholder="ex:2"
                     required
                 >
 
@@ -392,7 +392,7 @@
 
     <div class="card users-section">
 
-        <h2>All School Leaders</h2>
+        <h2>All School Teachers</h2>
 
 
         <button
@@ -926,9 +926,6 @@ function prepareUpdate(
 
 
 
-// ==========================================
-// UPDATE USER
-// ==========================================
 
 document
     .getElementById("updateForm")
@@ -1035,9 +1032,6 @@ document
 
 
 
-// ==========================================
-// DELETE USER
-// ==========================================
 
 async function deleteUser(id) {
 
@@ -1079,9 +1073,7 @@ async function deleteUser(id) {
         alert(data.message);
 
 
-        // Refresh table
-
-        getUsers();
+ getUsers();
 
 
     }
@@ -1099,9 +1091,7 @@ async function deleteUser(id) {
 
 
 
-// ==========================================
-// LOAD USERS WHEN PAGE OPENS
-// ==========================================
+
 
 getUsers();
 

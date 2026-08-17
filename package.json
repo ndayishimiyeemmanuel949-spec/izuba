@@ -14,10 +14,18 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev":"nodemon index.js"
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module"
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ndayishimiyeemmanuel949-spec/izuba.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ndayishimiyeemmanuel949-spec/izuba/issues"
+  },
+  "homepage": "https://github.com/ndayishimiyeemmanuel949-spec/izuba#readme"
 }
